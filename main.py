@@ -5,6 +5,7 @@ import init
 from negotiation import Negotiation
 bot = init
 def mainReal():
+    #main
     print("hello world")
 
     init.chatBot = init.Init2().i()

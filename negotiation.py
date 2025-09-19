@@ -6,10 +6,13 @@ class Negotiation:
         print("Хендлер зарегистрирован")
         bot = init.chatBot
 
+
         # хендлер на любые сообщения
         @bot.message_handler(func=lambda m: True)
         def any_message_handler(message):
+            user_id = message.from_user.id
             bot.send_message(message.chat.id, f"Принял сообщение: {message.text}")
+            bot.send_message(message.chat.id, user_id)
 
         # хендлер на callback (кнопки)
         @bot.callback_query_handler(func=lambda call: True)
