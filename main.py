@@ -1,12 +1,11 @@
 import telebot
 import json
+from init import Init2
 def mainReal():
-    with open('token.json', 'r') as f:
-        config = json.load(f)
-
-    token = config['token']
-    chatBot = telebot.TeleBot(token)
-
+    #main
+    init1 = Init2()
+    chatBot = init1.i()
+#TODO тестирование
     @chatBot.message_handler(commands=['start'])
     def commanndStart(message):
         chat = message.chat
@@ -18,6 +17,6 @@ def mainReal():
         chatBot.send_message(message.chat.id, info)
 
     chatBot.polling(none_stop= True)
-
+#main
 if __name__ == "__main__":
     mainReal()
