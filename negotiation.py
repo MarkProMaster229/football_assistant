@@ -1,22 +1,36 @@
-# negotiation.py
 import init
 
 class Negotiation:
+    def __init__(self):
+        self.bot = init.chatBot
+        self.users = []
+
     def connekted(self):
-        print("Хендлер зарегистрирован")
-        bot = init.chatBot
+        bot = self.bot
+        users = self.users
 
-
-        # хендлер на любые сообщения
-        @bot.message_handler(func=lambda m: True)
-        def any_message_handler(message):
+        # стартовый хэндлер для команды /start
+        @bot.message_handler(commands=['start'])
+        def start_handler(message):
             user_id = message.from_user.id
-            bot.send_message(message.chat.id, f"Принял сообщение: {message.text}")
-            bot.send_message(message.chat.id, user_id)
+            if user_id not in users and len(users) < 2:
+                users.append(user_id)
+                bot.send_message(user_id, "Вы подключены к анонимному чату.")
 
-        # хендлер на callback (кнопки)
-        @bot.callback_query_handler(func=lambda call: True)
-        def callback_handler(call):
-            user_id = call.from_user.id
-            chat_id = call.message.chat.id
-            bot.send_message(chat_id, f"user_id={user_id}, chat_id={chat_id}")
+            if len(users) == 2:
+                for uid in users:
+                    bot.send_message(uid, "Анонимный чат начат!")
+
+        # хэндлер на любые сообщения после /start
+        @bot.message_handler(func=lambda m: True)
+        def message_handler(message):
+            user_id = message.from_user.id
+            if user_id not in users:
+                bot.send_message(user_id, "Сначала напишите /start для подключения к чату.")
+                return
+
+            for uid in users:
+                if uid != user_id:
+                    bot.send_message(uid,message.text)
+
+        print("test: Анонимный чат запущен")
