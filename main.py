@@ -2,7 +2,7 @@ import telebot
 import json
 import init
 
-from negotiation import Negotiation
+from business_logic.negotiation import Negotiation
 bot = init
 def mainReal():
     #main

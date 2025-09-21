@@ -16,6 +16,7 @@ class Negotiation:
             if user_id not in users and len(users) < 2:
                 users.append(user_id)
                 bot.send_message(user_id, "Вы подключены к анонимному чату.")
+                bot.send_message(user_id, "debug status: True")
 
             if len(users) == 2:
                 for uid in users:
