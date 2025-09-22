@@ -22,16 +22,4 @@ class Negotiation:
                 for uid in users:
                     bot.send_message(uid, "Анонимный чат начат!")
 
-        # хэндлер на любые сообщения после /start
-        @bot.message_handler(func=lambda m: True)
-        def message_handler(message):
-            user_id = message.from_user.id
-            if user_id not in users:
-                bot.send_message(user_id, "Сначала напишите /start для подключения к чату.")
-                return
-
-            for uid in users:
-                if uid != user_id:
-                    bot.send_message(uid,message.text)
-
         print("test: Анонимный чат запущен")

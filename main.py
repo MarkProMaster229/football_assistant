@@ -3,6 +3,7 @@ import json
 import init
 
 from business_logic.negotiation import Negotiation
+from business_logic.stat import Stat
 bot = init
 def mainReal():
     #main
@@ -12,6 +13,9 @@ def mainReal():
 
     dialog = Negotiation()
     dialog.connekted()
+
+    stat = Stat()
+    stat.match()
 
     init.chatBot.polling(none_stop=True)
 
