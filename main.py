@@ -15,7 +15,6 @@ def mainReal():
     dialog.connekted()
 
     stat = Stat()
-    stat.match()
 
     init.chatBot.polling(none_stop=True)
 

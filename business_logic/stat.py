@@ -4,25 +4,20 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 class Stat:
     def __init__(self):
         self.bot = init.chatBot
-        self.users = []
+        self.user_teams = {}
+        self.teams = ["Барса", "Реал", "Бавария", "ПСЖ"]  # можно потом получать динамически
 
-    def match(self):#не математика, а матч
-        bot = self.bot
-        users = self.users
+        self.bot.callback_query_handler(func=lambda call: call.data.startswith("team_"))(self.team_selected)
 
-        @bot.message_handler(commands=['match'])
-        def start(msg):
-            keyboard = InlineKeyboardMarkup()
-            keyboard.add(InlineKeyboardButton("Расписание матчей", callback_data="schedule"))
-            keyboard.add(InlineKeyboardButton("Состав команды", callback_data="squad"))
-            bot.send_message(msg.chat.id, "Выберите действие:", reply_markup=keyboard)
+        self.bot.message_handler(commands=['match'])(self.match)
 
-        @bot.callback_query_handler(func=lambda call: True)
-        def callback_handler(call):
-            if call.data == "schedule":
-                bot.answer_callback_query(call.id)
-                bot.send_message(call.message.chat.id, "Здесь будет расписание матчей")
-            elif call.data == "squad":
-                bot.answer_callback_query(call.id)
-                bot.send_message(call.message.chat.id, "Здесь будет состав команды")
+    def match(self, msg):
+        keyboard = InlineKeyboardMarkup(row_width=2)
+        for team in self.teams:
+            keyboard.add(InlineKeyboardButton(team, callback_data=f"team_{team}"))
+        self.bot.send_message(msg.chat.id, "Выберите команду:", reply_markup=keyboard)
 
+    def team_selected(self, call):
+        team_name = call.data.split("_")[1]
+        self.user_teams[call.from_user.id] = team_name
+        self.bot.send_message(call.message.chat.id, f"Вы выбрали команду: {team_name}")
