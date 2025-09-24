@@ -29,7 +29,7 @@ class Negotiation:
         user_teams = {}
         @bot.message_handler(commands=['dialogue'])
         def dialogue(message):
-            dialogue = ["Пари НН", "Реал", "Бавария", "ПСЖ"]
+            dialogue = ["PariNN", "Real", "Bayern", "PSG"]
 
             keyboard = types.InlineKeyboardMarkup(row_width=2)
             for d in dialogue:
@@ -39,7 +39,20 @@ class Negotiation:
         @bot.callback_query_handler(func=lambda call: call.data.startswith("team_"))
         def dialoge_selected(call):
             team_name = call.data.split("_", 1)[1]
+            team_links = {
+                "PariNN": "https://github.com/MarkProMaster229",
+                "Real": "https://example.com/real",
+                "Bayern": "https://example.com/bayern",
+                "PSG": "https://example.com/psg"
+                }
+
+            link = team_links.get(team_name, "https://example.com")
             user_teams[call.from_user.id] = team_name
             bot.send_message(call.message.chat.id, f"Вы выбрали команду: {team_name}")
+            bot.send_message(
+                chat_id=call.message.chat.id,
+                text=f"Вы выбрали команду: [{team_name}]({link})",
+                parse_mode="Markdown"
+                )
 
 
