@@ -2,9 +2,9 @@ import telebot
 import json
 import init
 
-from business_logic.negotiation import Negotiation
-from business_logic.stat import Stat
-from business_logic.parse import Parse
+from managers.dialog_manager import NegotiationManager
+from managers.stat_manager import Stat
+from managers.parser_manager import ParserManager
 bot = init
 def mainReal():
     #main
@@ -12,13 +12,13 @@ def mainReal():
 
     init.chatBot = init.Init2().i()
 
-    dialog = Negotiation()
-    dialog.connekted()
+    dialog = NegotiationManager()
+    dialog.negotiationManager()
 
     stat = Stat()
 
-    pars = Parse()
-    pars.parser()
+    parser = ParserManager()
+    parser.parserInit()
 
     init.chatBot.polling(none_stop=True)
 

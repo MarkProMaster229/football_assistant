@@ -6,3 +6,7 @@ business_logic/__pycache__/__init__.cpython-313.pyc
 business_logic/__pycache__/stat.cpython-313.pyc
 players.json
 business_logic/__pycache__/parse.cpython-313.pyc
+managers/__pycache__/__init__.cpython-313.pyc
+managers/__pycache__/parser_manager.cpython-313.pyc
+managers/__pycache__/dialog_manager.cpython-313.pyc
+managers/__pycache__/stat_manager.cpython-313.pyc
