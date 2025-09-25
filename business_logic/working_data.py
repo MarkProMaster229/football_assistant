@@ -13,3 +13,4 @@ class Work:
         for player in data:
             self.players_array.append([player["number"], player["name"], player["position"]])
             print(player["number"], player["name"], player["position"])
+        return self.players_array
