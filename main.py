@@ -5,7 +5,6 @@ import init
 from managers.dialog_manager import NegotiationManager
 from managers.stat_manager import Stat
 from managers.parser_manager import ParserManager
-from business_logic.working_data import Work
 from managers.getManager import ManagerGet
 bot = init
 def mainReal():
