@@ -12,3 +12,7 @@ managers/__pycache__/dialog_manager.cpython-313.pyc
 managers/__pycache__/stat_manager.cpython-313.pyc
 business_logic/__pycache__/working_data.cpython-313.pyc
 managers/__pycache__/getManager.cpython-313.pyc
+matches.json
+.gitignore
+managers/__pycache__/parsesob_manager.cpython-313.pyc
+business_logic/__pycache__/parsesob.cpython-313.pyc
