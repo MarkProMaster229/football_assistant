@@ -5,7 +5,7 @@ class Stat:
     def __init__(self):
         self.bot = init.chatBot
         self.user_teams = {}
-        self.teams = ["Барса", "Реал", "Бавария", "ПСЖ"]  # можно потом получать динамически
+        self.teams = ["Барса", "Реал", "Бавария", "ПСЖ"]
 
         self.bot.callback_query_handler(func=lambda call: call.data.startswith("tea_"))(self.team_selected)
 

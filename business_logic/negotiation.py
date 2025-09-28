@@ -29,7 +29,7 @@ class Negotiation:
         user_teams = {}
         @bot.message_handler(commands=['dialogue'])
         def dialogue(message):
-            dialogue = ["PariNN", "Real", "Bayern", "PSG"]
+            dialogue = ["PariNN(офиц.канал Telegram)", "PariNN(офиц.канал VK)"]
 
             keyboard = types.InlineKeyboardMarkup(row_width=2)
             for d in dialogue:
@@ -40,10 +40,8 @@ class Negotiation:
         def dialoge_selected(call):
             team_name = call.data.split("_", 1)[1]
             team_links = {
-                "PariNN": "https://github.com/MarkProMaster229",
-                "Real": "https://example.com/real",
-                "Bayern": "https://example.com/bayern",
-                "PSG": "https://example.com/psg"
+                "PariNN(офиц.канал Telegram)": "https://t.me/fcparinn",
+                "PariNN(офиц.канал VK)": "http://vk.com/fcparinn",
                 }
 
             link = team_links.get(team_name, "https://example.com")
