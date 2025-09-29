@@ -7,7 +7,7 @@ from managers.stat_manager import StatManager
 from managers.parser_manager import ParserManager
 from managers.getManager import ManagerGet
 from managers.parsesob_manager import FootballParserManager
-from startBot import Startbot
+
 bot = init
 def mainReal():
     #main
@@ -26,7 +26,6 @@ def mainReal():
 
     parserob = FootballParserManager()
     parserob.init()
-    start2 = Startbot()
 
     init.chatBot.polling(none_stop=True)
 
