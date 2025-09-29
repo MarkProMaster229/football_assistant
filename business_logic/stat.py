@@ -10,6 +10,7 @@ class Stat:
         self.touch = {}
 
     def statGame(self, msg):
+        self.tours_dict.clear()
         keyboard = InlineKeyboardMarkup(row_width=2)
         with open("matches.json", "r", encoding="utf-8") as f:
             data2 = json.load(f)
