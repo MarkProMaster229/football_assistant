@@ -10,6 +10,14 @@ class Negotiation:
     def connekted(self):
         bot = self.bot
         users = self.users
+        @bot.message_handler(commands=['start'])
+        def start_hendler(message):
+            user_id = message.from_user.id
+            bot.send_message(user_id, "основыне команды " \
+            "/start - команды," \
+            "/stat - Статистика последних игр команды " \
+            "/players - Информация о составе команды " \
+            "/dialogue - официальные группы команды")
 
 
         # стартовый хэндлер для команды /start
