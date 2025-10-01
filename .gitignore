@@ -16,3 +16,7 @@ matches.json
 managers/__pycache__/parsesob_manager.cpython-313.pyc
 business_logic/__pycache__/parsesob.cpython-313.pyc
 __pycache__/startBot.cpython-313.pyc
+tele_session.session
+tele_session.session-journal
+.gitignore
+config.json

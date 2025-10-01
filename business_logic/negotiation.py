@@ -1,22 +1,70 @@
+import os
 import init
+import asyncio
+import json
+
+from telethon import TelegramClient
+from telebot import types
 from telebot import TeleBot, types
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 class Negotiation:
     def __init__(self):
         self.bot = init.chatBot
         self.users = []
+        self.tele_client = None
+        config_path = os.path.join(os.path.dirname(__file__), "..", "config.json")
+        config_path = os.path.abspath(config_path)
 
+        if os.path.exists(config_path):
+            with open(config_path, "r") as f:
+                config = json.load(f)
+            self.api_id = config.get("api_id")
+            self.api_hash = config.get("api_hash")
+        else:
+            self.api_id = None
+            self.api_hash = None
 
     def connekted(self):
         bot = self.bot
         users = self.users
+        def get_last_post_sync(channel_username):
+            if not (self.api_id and self.api_hash):
+                return "Нет API для Telegram, пост не может быть получен."
+            from telethon import TelegramClient
+            import asyncio
+
+            async def fetch():
+                async with TelegramClient('tele_session', self.api_id, self.api_hash) as client:
+                    msgs = await client.get_messages(channel_username, limit=1)
+                    if not msgs:
+                        return "Нет сообщений в канале."
+                    msg = msgs[0]
+                    if msg.message:
+                        return msg.message
+                    elif hasattr(msg, 'text') and msg.text:
+                        return msg.text
+                    else:
+                        return "Сообщение пустое или содержит только медиа."
+
+            try:
+                return asyncio.run(fetch())
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                result = loop.run_until_complete(fetch())
+                loop.close()
+                return result
+
+
+
+
         @bot.message_handler(commands=['start'])
         def start_hendler(message):
             user_id = message.from_user.id
-            bot.send_message(user_id, "основыне команды " \
-            "/start - команды," \
-            "/stat - Статистика последних игр команды " \
-            "/players - Информация о составе команды " \
+            bot.send_message(user_id, "основые команды.  \n" \
+            "/start - команды \n" \
+            "/stat - Статистика последних игр команды \n" \
+            "/players - Информация о составе команды \n" \
             "/dialogue - официальные группы команды")
 
 
@@ -60,5 +108,6 @@ class Negotiation:
                 text=f"Вы выбрали команду: [{team_name}]({link})",
                 parse_mode="Markdown"
                 )
-
-
+            if "Telegram" in team_name:
+                last_post = get_last_post_sync("fcparinn") # username канала без @
+                bot.send_message(call.message.chat.id, f"Последний пост канала:\n\n{last_post}")
