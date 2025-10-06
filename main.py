@@ -12,8 +12,11 @@ bot = init
 def mainReal():
     #main
     print("hello world")
+    from managers.Near_Event import Near_Event
 
     init.chatBot = init.Init2().i()
+    bot = init.chatBot
+    d = Near_Event(bot)
 
     dialog = NegotiationManager()
     dialog.negotiationManager()
