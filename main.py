@@ -18,14 +18,15 @@ def mainReal():
     dialog = NegotiationManager()
     dialog.negotiationManager()
 
+    parserob = FootballParserManager()
+    parserob.init()
+
     stat = StatManager()
 
     parser = ParserManager()
     parser.parserInit()
     menagerGet = ManagerGet()
 
-    parserob = FootballParserManager()
-    parserob.init()
 
     init.chatBot.polling(none_stop=True)
 

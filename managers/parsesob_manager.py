@@ -6,16 +6,19 @@ class FootballParserManager:
         self.output_file = output_file
 
     def edit_json(self):
-        with open(self.output_file, "r", encoding="utf-8") as f:
-            matches = json.load(f)
-        for i in range(len(matches)):
-            if "score" in matches[i] and "vs" in matches[i]["score"]:
-                matches[i]["score"] = "матчу еще только предстоит быть"
-                matches[i]["score_home"] = 0
-                matches[i]["score_away"] = 0
-        with open(self.output_file, "w", encoding="utf-8") as f:
-            json.dump(matches, f, ensure_ascii=False, indent=4)
-
+        try:
+            with open(self.output_file, "r", encoding="utf-8") as f:
+                matches = json.load(f)
+                for i in range(len(matches)):
+                    if "score" in matches[i] and "vs" in matches[i]["score"]:
+                        matches[i]["score"] = "матчу еще только предстоит быть"
+                        matches[i]["score_home"] = 0
+                        matches[i]["score_away"] = 0
+                with open(self.output_file, "w", encoding="utf-8") as f:
+                    json.dump(matches, f, ensure_ascii=False, indent=4)
+        except FileNotFoundError:
+            print(f"Файл {self.output_file} не найден — пропускаем редактирование.")
+            return
     def init(self):
 
         FootballParser.start()
