@@ -22,3 +22,5 @@ tele_session.session-journal
 config.json
 managers/__pycache__/Near_Event.cpython-313.pyc
 dataNearEvent
+business_logic/__pycache__/model.cpython-313.pyc
+managers/__pycache__/model_long.cpython-313.pyc

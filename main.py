@@ -7,6 +7,7 @@ from managers.stat_manager import StatManager
 from managers.parser_manager import ParserManager
 from managers.getManager import ManagerGet
 from managers.parsesob_manager import FootballParserManager
+from managers.model_long import IncludeModel
 
 bot = init
 def mainReal():
@@ -29,8 +30,9 @@ def mainReal():
     parser = ParserManager()
     parser.parserInit()
     menagerGet = ManagerGet()
-
-
+    
+    usingModel = IncludeModel(bot)
+    
     init.chatBot.polling(none_stop=True)
 
     #main
