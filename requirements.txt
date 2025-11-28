@@ -1,9 +1,7 @@
 pyTelegramBotAPI
 requests
 beautifulsoup4
-asyncio
 telethon
 torch
-transformers 
+transformers
 gdown
-zipfile
