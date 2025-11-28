@@ -1,17 +1,12 @@
-from business_logic.working_data import Work
-import init
-from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
-from managers.parser_manager import ParserManager
+from business_logic.model import Model
 import threading
 
 class IncludeModel:
     def __init__(self, bot):
-        from business_logic.model import Model
-        from business_logic.stat import Stat
-
+        MODEL_PATH = "./local_model_dir/3"
+        
         self.bot = bot
-        self.model = Model()
-        self.stat = Stat()
+        self.model = Model(local_path=MODEL_PATH)
         self.lock = threading.Lock()
         self.busy = False
         self.waiting_users = set()
@@ -42,4 +37,3 @@ class IncludeModel:
             finally:
                 self.waiting_users.remove(msg.chat.id)
                 self.busy = False
-

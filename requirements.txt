@@ -5,3 +5,5 @@ asyncio
 telethon
 torch
 transformers 
+gdown
+zipfile
