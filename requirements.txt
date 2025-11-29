@@ -2,6 +2,4 @@ pyTelegramBotAPI
 requests
 beautifulsoup4
 telethon
-torch
-transformers
-gdown
+gradio_client

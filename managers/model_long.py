@@ -3,14 +3,13 @@ import threading
 
 class IncludeModel:
     def __init__(self, bot):
-        MODEL_PATH = "./local_model_dir/3"
-        
         self.bot = bot
-        self.model = Model(local_path=MODEL_PATH)
         self.lock = threading.Lock()
         self.busy = False
         self.waiting_users = set()
         self.register_handlers()
+
+        self.model = Model()
 
     def register_handlers(self):
         @self.bot.message_handler(commands=['model'])
@@ -30,7 +29,7 @@ class IncludeModel:
             self.bot.send_chat_action(msg.chat.id, 'typing')
             user_query = msg.text
             try:
-                result = self.model.modelGeneration(user_query)
+                result = self.model.generate_response(user_query)
                 self.bot.send_message(msg.chat.id, result)
             except Exception as e:
                 self.bot.send_message(msg.chat.id, f"Ошибка при генерации: {e}")
