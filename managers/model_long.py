@@ -34,5 +34,5 @@ class IncludeModel:
             except Exception as e:
                 self.bot.send_message(msg.chat.id, f"Ошибка при генерации: {e}")
             finally:
-                self.waiting_users.remove(msg.chat.id)
+                self.waiting_users.discard(msg.chat.id)
                 self.busy = False
