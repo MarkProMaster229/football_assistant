@@ -31,7 +31,7 @@ def mainReal():
     parser.parserInit()
     menagerGet = ManagerGet()
     
-    usingModel = IncludeModel(bot)
+    #usingModel = IncludeModel(bot)
     
     init.chatBot.polling(none_stop=True)
 
