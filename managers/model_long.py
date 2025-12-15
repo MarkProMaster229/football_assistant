@@ -29,7 +29,8 @@ class IncludeModel:
             self.bot.send_chat_action(msg.chat.id, 'typing')
             user_query = msg.text
             try:
-                result = self.model.generate_response(user_query)
+                a = Model()
+                result = a.load(user_query)
                 self.bot.send_message(msg.chat.id, result)
             except Exception as e:
                 self.bot.send_message(msg.chat.id, f"Ошибка при генерации: {e}")
